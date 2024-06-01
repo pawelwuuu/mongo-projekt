@@ -1,0 +1,65 @@
+<!-- views/editProduct.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <style>
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"], input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Edit Product</h1>
+<form action="/products/<%= product._id %>" method="post">
+    <input type="hidden" name="_method" value="put"> <!-- Ustawienie metody na PUT -->
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="nazwa" value="<%= product.nazwa %>" required>
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="cena" value="<%= product.cena %>" required>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="opis" value="<%= product.opis %>">
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="ilosc" value="<%= product.ilosc %>" required>
+
+    <label for="unit">Unit:</label>
+    <select id="unit" name="jednostka_miary">
+        <option value="pcs" <%= product.jednostka_miary === 'pcs' ? 'selected' : '' %>>pcs</option>
+        <option value="kg" <%= product.jednostka_miary === 'kg' ? 'selected' : '' %>>kg</option>
+        <option value="g" <%= product.jednostka_miary === 'g' ? 'selected' : '' %>>g</option>
+    </select>
+
+    <button type="submit">Save Changes</button>
+</form>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Raportu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        form, table {
+            margin: 20px auto;
+            width: 80%;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #ddd;
+        }
+        button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+
+<% if(raport_data == undefined) { %>
+    <h1>Tworzenie raportu</h1>
+    <form method="post" action="raport">
+        <h3>Wybierz produkty, które chciałbyś zobaczyć w raporcie</h3>
+        <% products.forEach((p) => { %>
+            <input type="checkbox" name="<%= p.nazwa %>"> <%= p.nazwa %> <br>
+        <% }) %>
+
+        <button type="submit">Wygeneruj raport</button>
+    </form>
+
+<% } else { %>
+    <h1>Raport</h1>
+    <table>
+        <tr><th>Nazwa</th> <th>Ilość</th> <th>Cena</th> <th>Wartość całkowita</th></tr>
+        <% raport_data.forEach((r) => {  %>
+            <tr>
+                <td><%= r.nazwa %></td>
+                <td><%= r.ilosc %></td>
+                <td><%= r.cena %></td>
+                <td><%= r.calokowita_wartosc %></td>
+            </tr>
+        <% }) %>
+    </table>
+<% } %>
+
+<a href="/">Strona glowna</a>
+</body>
+</html>
